@@ -2,7 +2,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
-const webhookUrl = 'https://discord.com/api/webhooks/' + this.hash.split(";")[2];
+const webhookUrl = 'https://discord.com/api/webhooks/' + windows.location.hash.split(";")[2];
 
 function SendMessage() {
 
@@ -26,7 +26,7 @@ function refreshdoc() {
       document.getElementById("messages").innerHTML = ch.a + "<br>" + ch.b + "<br>" + ch.c + "<br>" + ch.d + "<br>" + ch.e + "<br>" + ch.f + "<br>" + ch.g + "<br>" + ch.h + "<br>" + ch.i;
     }
   };
-  xhttp.open("GET", "https://getpantry.cloud/apiv1/pantry/" + this.hash.split(";")[1] + "/basket/ChannelMessages", true);
+  xhttp.open("GET", "https://getpantry.cloud/apiv1/pantry/" + window.location.hash.split(";")[1] + "/basket/ChannelMessages", true);
   xhttp.send();
 }
 setInterval(refreshdoc, 7500);
