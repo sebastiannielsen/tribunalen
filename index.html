@@ -1,0 +1,70 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+const webhookUrl = 'https://discord.com/api/webhooks/' + this.hash.split(";")[2];
+
+function SendMessage() {
+
+response = fetch(webhookUrl, { method: 'POST', headers: { 'Content-Type': 'application/json', },  body: "{\"content\": \""+document.u.p.value.replaceAll("\n","\\n")+"\"}" ,});
+document.u.p.value = "";
+}
+function VoteYES() {
+response = fetch(webhookUrl, { method: 'POST', headers: { 'Content-Type': 'application/json', },  body: "{\"embeds\": [{ \"title\": \"JA Röst lagd\", \"fields\": [{ \"name\": \"JA röst\", \"value\": \"Denna jurymedlem röstar JA på frågan!\" }, { \"name\": \"Motivering\", \"value\": \""+document.u.p.value.replaceAll("\n","\\n")+"\" }]}] }" ,});
+document.u.p.value = "";
+}
+function VoteNO() {
+response = fetch(webhookUrl, { method: 'POST', headers: { 'Content-Type': 'application/json', },  body: "{\"embeds\": [{ \"title\": \"NEJ Röst lagd\", \"fields\": [{ \"name\": \"NEJ röst\", \"value\": \"Denna jurymedlem röstar NEJ på frågan!\" }, { \"name\": \"Motivering\", \"value\": \""+document.u.p.value.replaceAll("\n","\\n")+"\" }]}] }" ,});
+document.u.p.value = "";
+}
+
+function refreshdoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      const ch = JSON.parse(this.responseText);
+      document.getElementById("messages").innerHTML = ch.a + "<br>" + ch.b + "<br>" + ch.c + "<br>" + ch.d + "<br>" + ch.e + "<br>" + ch.f + "<br>" + ch.g + "<br>" + ch.h + "<br>" + ch.i;
+    }
+  };
+  xhttp.open("GET", "https://getpantry.cloud/apiv1/pantry/" + this.hash.split(";")[1] + "/basket/ChannelMessages", true);
+  xhttp.send();
+}
+setInterval(refreshdoc, 7500);
+refreshdoc();
+
+</script>
+</head>
+<body>
+<form name="u">
+<textarea name="p" cols="30" rows="10"></textarea><br>
+<input type="button" value="Skicka meddelande" onClick="SendMessage()"><br><br><br>
+<input type="button" value="Jag r&ouml;star **JA*" onClick="VoteYES()"><br><br><br>
+<input type="button" value="Jag r&ouml;star **NEJ**" onClick="VoteNO()">
+</form>
+
+<details>
+<summary style="font-size: 20px;">Viktig info!</summary>
+Hur det fungerar f&ouml;r dig som Jury:<br>
+<ol>
+<li>Du f&aring;r en URL av Justitiemedlaren med caset.</li>
+<li>Du anv&auml;nder ovanst&aring;ende kontroller f&ouml;r att meddela dina beslut.</li>
+<li>Motivering till JA/NEJ r&ouml;st skrivs i den stora rutan.</li>
+<li>Du granskar bevisningen. Ser du ett m&ouml;nster eller samband, notera det. Om flera jurymedlemmar oberoende ser samma sak lyfts det vidare.</li>
+<li>Har du fr&aring;gor till utredaren, skriv ovan.</li>
+<li>N&auml;r Justitiemedlaren anser att caset n&aring;tt sin &auml;nde, s&aring; ombeds du r&ouml;sta om personen &auml;r skyldig eller inte.</li>
+<li>Anv&auml;nd r&ouml;st-knapparna. Om resultatet &auml;r att personen &auml;r skyldig, kommer Justitiemedlaren att presentera ett straff-f&ouml;rslag nedan.</li>
+<li>Anv&auml;nd r&ouml;st-knapparna igen. Om du anser att straffet &auml;r f&ouml;r l&aring;gt eller f&ouml;r h&ouml;gt, skriv det i motiveringsrutan, s&aring; Justiemedlaren kan skriva ett nytt straff-f&ouml;rslag.</li>
+<li>Utredaren verkst&auml;ller straffet om straffet resulterar i JA.</li>
+</ol><br>
+Viktiga punkter:<br>
+<ul>
+<li>Ignorera bevisning som baserar sig p&aring; utsagor fr&aring;n andra icke-positionerade eller vad du sett i forumet, discord eller liknande. T&auml;nk p&aring; att en spelare kan sprida falska rykten vilket l&auml;tt kan bli till "vittnesbevis". T&auml;nk ocks&aring; p&aring; att det p&aring; impulse inte finns n&aring;got straff f&ouml;r att sprida felaktigheter eller ljuga att n&aring;gon brutit mot reglerna, s&aring; var vaksam! (Varningar f&ouml;r "F&ouml;rtal" p&aring; impulse ges bara ut vid sk IRL-f&ouml;rtal d&auml;r man sprider felaktigheter om personers IRL-liv)</li>
+<li>T&auml;nk p&aring; att endast f&ouml;ljande kan ing&aring; i ett straff: Konton, Pengar, Vapen, Skydd. F&ouml;ljande kan INTE ing&aring; i ett straff:  Respekt, Kills, Levlar, Amuletter, G&auml;ng, Nickname, V-bilder, Pressar. Det inneb&auml;r att dessa f&ouml;rem&aring;l INTE f&aring;r beslagtas fr&aring;n huvudkontot! Om straffet f&ouml;resl&aring;r detta skall det avvisas!</li>
+<li>Ovanst&aring;ende hindrar inte att de f&ouml;rem&aring;len ligger kvar p&aring; ett permanent nerst&auml;ngt konto, men ovanst&aring;ende f&ouml;rem&aring;l kan med ordinarie supportfunktioner INTE flyttas fr&aring;n mainkontot eller saknar reelt v&auml;rde. Det &auml;r <u>ABSOLUT F&ouml;RBJUDET</u> att nollst&auml;lla ett l&ouml;senord p&aring; ett konto som inte &auml;r nerst&auml;ngt permanent, f&ouml;r att verkst&auml;lla ett straff!</li>
+<li>G&auml;NG: Om n&aring;got av de konton som ska st&auml;ngas ner permanent &auml;r g&auml;ngledare i ett g&auml;ng p&aring; ett s&aring;dant s&auml;tt att icke permanent nerst&auml;ngda personer skulle bli "l&aring;sta" i g&auml;nget, s&aring; &auml;r det l&auml;mpligt att nollst&auml;lla l&ouml;senord p&aring; de PERMANENT nerst&auml;ngda kontona f&ouml;r att g&ouml;ra EN av de personer som inte st&auml;ngs ner permanent, g&auml;ngledare i g&auml;nget. G&aring; sedan ur g&auml;nget genom att nedgradera dig till medlem, och l&auml;mna g&auml;nget innan kontot st&auml;ngs ner permanent.</li>
+<li>Straffpraxis f&ouml;r allvarlig dubbelanv&auml;ndning minst 20+ dagar d&auml;r det finns cash/f&ouml;rem&aring;l &ouml;verf&ouml;ringar: 30 dagar p&aring; huvudkontot samt permanent p&aring; alla andra. Huvudkontot &auml;r alltid det med h&ouml;gst level. Eventuell vinst som skickats till huvudkontot beslagtas &auml;ven.</li>
+</ul>
+</details>
+<div id="messages"></div>
+</body>
+</html>
